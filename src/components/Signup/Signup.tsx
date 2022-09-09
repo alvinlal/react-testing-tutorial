@@ -1,6 +1,6 @@
 import { ChangeEvent, useState, MouseEvent } from 'react';
 import validator from 'validator';
-interface SignupInput {
+export interface SignupInput {
   email: string;
   password: string;
   confirmPassword: string;
@@ -24,8 +24,13 @@ const Signup: React.FC = () => {
 
   const handleClick = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
+    setError('');
     if (!validator.isEmail(signupInput.email)) {
       setError('the email you input is invalid');
+    } else if (signupInput.password.length < 5) {
+      setError('password should contain atleast 5 characters');
+    } else if (signupInput.confirmPassword !== signupInput.password) {
+      setError("passwords don't match");
     }
   };
 
