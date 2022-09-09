@@ -1,13 +1,13 @@
 import { ChangeEvent, useState, MouseEvent } from 'react';
 import validator from 'validator';
-export interface SignupInput {
+export interface SignupProps {
   email: string;
   password: string;
   confirmPassword: string;
 }
 
 const Signup: React.FC = () => {
-  const [signupInput, setSignInput] = useState<SignupInput>({
+  const [signupInput, setSignInput] = useState<SignupProps>({
     email: '',
     password: '',
     confirmPassword: '',

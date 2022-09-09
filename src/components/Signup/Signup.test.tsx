@@ -13,10 +13,10 @@
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Signup, { SignupInput } from './Signup';
+import Signup, { SignupProps } from './Signup';
 
 describe('Signup.tsx', () => {
-  const typeIntoForm = ({ email, password, confirmPassword }: Partial<SignupInput>) => {
+  const typeIntoForm = ({ email, password, confirmPassword }: Partial<SignupProps>) => {
     const emailInputElement = screen.getByRole('textbox') as HTMLInputElement;
     const passwordInputElement = screen.getByLabelText('Password') as HTMLInputElement;
     const confirmPasswordInputElement = screen.getByLabelText(
