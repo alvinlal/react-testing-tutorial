@@ -4,8 +4,8 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import cats from '../../../test-utils/mocks/cats.json';
-import Cards from '../Cards';
+import cats from '../../../../../../test-utils/mocks/cats.json';
+import Cards from '../../Cards';
 
 describe('Cards.tsx', () => {
   it('Should render 5 Card components', () => {

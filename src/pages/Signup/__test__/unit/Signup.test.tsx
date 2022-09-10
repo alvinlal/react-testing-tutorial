@@ -13,7 +13,7 @@
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Signup, { SignupProps } from './Signup';
+import Signup, { SignupProps } from '../../Signup';
 
 describe('Signup.tsx', () => {
   const typeIntoForm = ({ email, password, confirmPassword }: Partial<SignupProps>) => {

@@ -1,13 +1,9 @@
 import './App.css';
-import Card from './components/Card/Card';
-import Cards from './components/Cards/Cards';
-import Signup from './components/Signup/Signup';
-import cats from './test-utils/mocks/cats.json';
-
+import Pets from './pages/Pets/Pets';
 function App() {
   return (
     <div>
-      <Cards cats={cats} />
+      <Pets />
     </div>
   );
 }

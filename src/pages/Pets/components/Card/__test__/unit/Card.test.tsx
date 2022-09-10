@@ -11,7 +11,7 @@
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Card from '../Card';
+import Card from '../../Card';
 
 describe('Card.tsx', () => {
   const cat: Cat = {

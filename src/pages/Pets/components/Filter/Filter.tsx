@@ -1,3 +1,5 @@
+import './Filter.css';
+
 const Filter: React.FC = () => {
   return (
     <div className='pet-filter-container'>

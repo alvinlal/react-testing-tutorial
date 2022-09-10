@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { ReactComponent as HeartFilled } from '../../assets/icons/heartFilled.svg';
-import { ReactComponent as HeartOutlined } from '../../assets/icons/heartOutlined.svg';
+import { ReactComponent as HeartFilled } from '../../../../assets/icons/heartFilled.svg';
+import { ReactComponent as HeartOutlined } from '../../../../assets/icons/heartOutlined.svg';
 import './Card.css';
 
 const Card: React.FC<Cat> = ({ name, phone, email, image: { url, alt }, favoured }) => {

@@ -6,7 +6,7 @@
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Filter from '../Filter';
+import Filter from '../../Filter';
 
 describe('Filter.tsx', () => {
   it('Should be able to change value of favorite select', () => {
