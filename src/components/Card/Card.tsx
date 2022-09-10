@@ -3,22 +3,11 @@ import { ReactComponent as HeartFilled } from '../../assets/icons/heartFilled.sv
 import { ReactComponent as HeartOutlined } from '../../assets/icons/heartOutlined.svg';
 import './Card.css';
 
-export interface CardProps {
-  name: string;
-  phone: number;
-  email: string;
-  image: {
-    url: string;
-    alt: string;
-  };
-  favoured: boolean;
-}
-
-const Card: React.FC<CardProps> = ({ name, phone, email, image: { url, alt }, favoured }) => {
+const Card: React.FC<Cat> = ({ name, phone, email, image: { url, alt }, favoured }) => {
   const [isFavoured, setIsFavoured] = useState<boolean>(favoured);
 
   return (
-    <div className='card'>
+    <div className='card' data-testid='cat-card'>
       <div className='card-header'>
         <img src={url} alt={alt} className='card-img' />
         <button className='heart' onClick={() => setIsFavoured(!isFavoured)}>
