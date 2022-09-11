@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 import Cards from './components/Cards/Cards';
-import Filter from './components/Filter/Filter';
+import Filter, { FilterOptions } from './components/Filter/Filter';
 import './Pets.css';
 
 const Pets: React.FC = () => {
-  const [cats, setCats] = useState<Cat[] | null>(null);
+  const [cats, setCats] = useState<Cat[]>([]);
+  const [filteredCats, setFilteredCats] = useState<Cat[]>([]);
+  const [filters, setFilters] = useState<FilterOptions>({
+    gender: 'any',
+    favorite: 'any',
+  });
   const [status, setStatus] = useState('idle');
 
   const fetchCats = async () => {
@@ -18,6 +23,7 @@ const Pets: React.FC = () => {
       });
       if (!data.error) {
         setCats(data);
+        setFilteredCats(data);
         setStatus('success');
       }
     } catch (err) {
@@ -25,17 +31,37 @@ const Pets: React.FC = () => {
     }
   };
 
+  const updateFavoured = (index: number, favoured: boolean) => {
+    const updatedCats = [...cats];
+    updatedCats[index].favoured = favoured;
+    setCats(updatedCats);
+  };
+
   useEffect(() => {
     fetchCats();
   }, []);
 
+  useEffect(() => {
+    let catsFiltered = [...cats];
+    if (filters.gender !== 'any') {
+      catsFiltered = catsFiltered.filter(cat => cat.gender === filters.gender);
+    }
+    if (filters.favorite !== 'any') {
+      catsFiltered = catsFiltered.filter(
+        cat => cat.favoured === (filters.favorite === 'favoured' ? true : false)
+      );
+    }
+    setFilteredCats(catsFiltered);
+    // eslint-disable-next-line
+  }, [filters]);
+
   return (
     <div className='container'>
       <div className='app-container'>
-        <Filter />
+        <Filter setFilters={setFilters} />
         {status === 'loading' && <p>loading cats...</p>}
         {status === 'error' && <h3>something went wrong</h3>}
-        {status === 'success' && cats && <Cards cats={cats} />}
+        {status === 'success' && <Cards cats={filteredCats} updateFavoured={updateFavoured} />}
       </div>
     </div>
   );

@@ -1,11 +1,16 @@
 import Card from '../Card/Card';
 import './Cards.css';
 
-const Cards: React.FC<{ cats: Cat[] }> = ({ cats }) => {
+interface CardsProps {
+  cats: Cat[];
+  updateFavoured: (index: number, favoured: boolean) => void;
+}
+
+const Cards: React.FC<CardsProps> = ({ cats, updateFavoured }) => {
   return (
     <div className='pet-cards-container'>
-      {cats.map(cat => (
-        <Card key={cat.id} {...cat} />
+      {cats.map((cat, index) => (
+        <Card key={cat.id} {...cat} updateFavoured={updateFavoured} index={index} />
       ))}
     </div>
   );

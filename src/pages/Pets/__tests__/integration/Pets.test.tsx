@@ -3,11 +3,15 @@
  * 1. Should show 5 Card component if the api request is successfull
  * 2. Should show loader when the api request is loading
  * 3. Should show error message when the api request has failed
- * 4. Should be able to filter by favorited
- * 5. Should be able to filter by cat gender
+ * 4. Should be able to filter by male cats
+ * 5. Should be able to filter by female cats
+ * 5. Should be able to filter by favorited cats
+ * 6. Should be able to filter by not favorited cats
+ * 7. Should be able to filter by favoured male cats
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { server, rest } from '../../../../test-utils/server';
 import Pets from '../../Pets';
 
@@ -38,5 +42,58 @@ describe('Pets.tsx', () => {
         name: 'something went wrong',
       })
     ).toBeInTheDocument();
+  });
+
+  it('Should be able to filter by male cats', async () => {
+    render(<Pets />);
+    const cards = await screen.findAllByTestId('cat-card');
+    const genderFilter = screen.getByLabelText('Gender');
+    userEvent.selectOptions(genderFilter, 'male');
+    const maleCatCards = screen.getAllByTestId('cat-card');
+    expect(maleCatCards).toStrictEqual([cards[1], cards[3]]);
+  });
+
+  it('Should be able to filter by female cats', async () => {
+    render(<Pets />);
+    const cards = await screen.findAllByTestId('cat-card');
+    const genderFilter = screen.getByLabelText('Gender');
+    userEvent.selectOptions(genderFilter, 'female');
+    const maleCatCards = screen.getAllByTestId('cat-card');
+    expect(maleCatCards).toStrictEqual([cards[0], cards[2], cards[4]]);
+  });
+
+  it('Should be able to filter by favorited cats', async () => {
+    render(<Pets />);
+    const cards = await screen.findAllByTestId('cat-card');
+    userEvent.click(within(cards[0]).getByRole('button'));
+    userEvent.click(within(cards[3]).getByRole('button'));
+    const favoriteFilter = screen.getByLabelText('Favorite');
+    userEvent.selectOptions(favoriteFilter, 'favoured');
+    const favoritedCatCards = screen.getAllByTestId('cat-card');
+    expect(favoritedCatCards).toStrictEqual([cards[0], cards[3]]);
+  });
+
+  it('Should be able to filter by not favorited cats', async () => {
+    render(<Pets />);
+    const cards = await screen.findAllByTestId('cat-card');
+    userEvent.click(within(cards[0]).getByRole('button'));
+    userEvent.click(within(cards[4]).getByRole('button'));
+    const favoriteFilter = screen.getByLabelText('Favorite');
+    userEvent.selectOptions(favoriteFilter, 'not favoured');
+    const notFavoritedCatCards = screen.getAllByTestId('cat-card');
+    expect(notFavoritedCatCards).toStrictEqual([cards[1], cards[2], cards[3]]);
+  });
+
+  it('Should be able to filter by favoured male cats', async () => {
+    render(<Pets />);
+    const cards = await screen.findAllByTestId('cat-card');
+    userEvent.click(within(cards[0]).getByRole('button'));
+    userEvent.click(within(cards[3]).getByRole('button'));
+    const favoriteFilter = screen.getByLabelText('Favorite');
+    userEvent.selectOptions(favoriteFilter, 'favoured');
+    const genderFilter = screen.getByLabelText('Gender');
+    userEvent.selectOptions(genderFilter, 'male');
+    const favouredMaleCatCards = screen.getAllByTestId('cat-card');
+    expect(favouredMaleCatCards).toStrictEqual([cards[3]]);
   });
 });

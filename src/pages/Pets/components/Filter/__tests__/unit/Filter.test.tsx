@@ -10,7 +10,7 @@ import Filter from '../../Filter';
 
 describe('Filter.tsx', () => {
   it('Should be able to change value of favorite select', () => {
-    render(<Filter />);
+    render(<Filter setFilters={() => {}} />);
     const select = screen.getByLabelText('Favorite') as HTMLSelectElement;
     expect(select.value).toBe('any');
     userEvent.selectOptions(select, 'favoured');
@@ -20,7 +20,7 @@ describe('Filter.tsx', () => {
   });
 
   it('Should be able to change value of gender select', () => {
-    render(<Filter />);
+    render(<Filter setFilters={() => {}} />);
     const select = screen.getByLabelText('Gender') as HTMLSelectElement;
     expect(select.value).toBe('any');
     userEvent.selectOptions(select, 'male');

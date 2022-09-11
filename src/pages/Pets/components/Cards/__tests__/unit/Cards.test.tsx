@@ -9,7 +9,7 @@ import Cards from '../../Cards';
 
 describe('Cards.tsx', () => {
   it('Should render 5 Card components', () => {
-    render(<Cards cats={cats} />);
+    render(<Cards updateFavoured={() => {}} cats={cats} />);
     expect(screen.getAllByTestId('cat-card').length).toBe(5);
   });
 });
