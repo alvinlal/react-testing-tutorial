@@ -1,45 +1,16 @@
 import { useEffect, useState } from 'react';
 import Cards from './components/Cards/Cards';
 import Filter, { FilterOptions } from './components/Filter/Filter';
+import usePets from './hooks/usePets';
 import './Pets.css';
 
 const Pets: React.FC = () => {
-  const [cats, setCats] = useState<Cat[]>([]);
-  const [filteredCats, setFilteredCats] = useState<Cat[]>([]);
+  const { cats, status } = usePets();
+  const [filteredCats, setFilteredCats] = useState<Cat[]>(cats);
   const [filters, setFilters] = useState<FilterOptions>({
     gender: 'any',
     favorite: 'any',
   });
-  const [status, setStatus] = useState('idle');
-
-  const fetchCats = async () => {
-    try {
-      setStatus('loading');
-      const data = await fetch('https://631c5fa04fa7d3264caca918.mockapi.io/api/cats').then(res => {
-        if (!res.ok) {
-          throw new Error('something went wrong');
-        }
-        return res.json();
-      });
-      if (!data.error) {
-        setCats(data);
-        setFilteredCats(data);
-        setStatus('success');
-      }
-    } catch (err) {
-      setStatus('error');
-    }
-  };
-
-  const updateFavoured = (index: number, favoured: boolean) => {
-    const updatedCats = [...cats];
-    updatedCats[index].favoured = favoured;
-    setCats(updatedCats);
-  };
-
-  useEffect(() => {
-    fetchCats();
-  }, []);
 
   useEffect(() => {
     let catsFiltered = [...cats];
@@ -53,7 +24,7 @@ const Pets: React.FC = () => {
     }
     setFilteredCats(catsFiltered);
     // eslint-disable-next-line
-  }, [filters]);
+  }, [filters, cats]);
 
   return (
     <div className='container'>
@@ -61,7 +32,7 @@ const Pets: React.FC = () => {
         <Filter setFilters={setFilters} />
         {status === 'loading' && <p>loading cats...</p>}
         {status === 'error' && <h3>something went wrong</h3>}
-        {status === 'success' && <Cards cats={filteredCats} updateFavoured={updateFavoured} />}
+        {status === 'success' && <Cards cats={filteredCats} />}
       </div>
     </div>
   );

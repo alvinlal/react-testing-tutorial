@@ -29,7 +29,7 @@ describe('Card.tsx', () => {
   };
 
   it('Should display the name of the cat', () => {
-    render(<Card {...cat} index={1} updateFavoured={() => {}} />);
+    render(<Card {...cat} index={1} />);
     expect(
       screen.getByRole('heading', {
         name: /sydney/i,
@@ -38,35 +38,35 @@ describe('Card.tsx', () => {
   });
 
   it('Should display the phone number of the owner', () => {
-    render(<Card {...cat} index={1} updateFavoured={() => {}} />);
+    render(<Card {...cat} index={1} />);
     expect(screen.getByText(cat.phone)).toBeInTheDocument();
   });
 
   it('Should display the email of the owner', () => {
-    render(<Card {...cat} index={1} updateFavoured={() => {}} />);
+    render(<Card {...cat} index={1} />);
     expect(screen.getByText(cat.email)).toBeInTheDocument();
   });
 
   it('Should show the image of the cat with correct src', () => {
-    render(<Card {...cat} index={1} updateFavoured={() => {}} />);
+    render(<Card {...cat} index={1} />);
     expect(screen.getByAltText(cat.image.alt)).toBeInTheDocument();
     expect((screen.getByAltText(cat.image.alt) as HTMLImageElement).src).toBe(cat.image.url);
   });
 
   it('Should show outlined heart', () => {
-    render(<Card {...cat} index={1} updateFavoured={() => {}} />);
+    render(<Card {...cat} index={1} />);
     expect(screen.queryByTestId('filled-heart')).not.toBeInTheDocument();
     expect(screen.getByTestId('outlined-heart')).toBeInTheDocument();
   });
 
   it('Should show filled heart', () => {
-    render(<Card {...cat} index={1} updateFavoured={() => {}} favoured={true} />);
+    render(<Card {...cat} index={1} favoured={true} />);
     expect(screen.queryByTestId('outlined-heart')).not.toBeInTheDocument();
     expect(screen.getByTestId('filled-heart')).toBeInTheDocument();
   });
 
   it('Should toggle heart status', () => {
-    render(<Card {...cat} index={1} updateFavoured={() => {}} />);
+    render(<Card {...cat} index={1} />);
 
     userEvent.click(screen.getByRole('button'));
     expect(screen.getByTestId('filled-heart')).toBeInTheDocument();

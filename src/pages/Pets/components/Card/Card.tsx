@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { ReactComponent as HeartFilled } from '../../../../assets/icons/heartFilled.svg';
 import { ReactComponent as HeartOutlined } from '../../../../assets/icons/heartOutlined.svg';
+import usePets from '../../hooks/usePets';
 import './Card.css';
 
 interface CardProps extends Cat {
   index: number;
-  updateFavoured: (index: number, favoured: boolean) => void;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -15,8 +15,8 @@ const Card: React.FC<CardProps> = ({
   email,
   image: { url, alt },
   favoured,
-  updateFavoured,
 }) => {
+  const { updateFavoured } = usePets();
   const [isFavoured, setIsFavoured] = useState<boolean>(favoured);
 
   const toggleFavoured = () => {
