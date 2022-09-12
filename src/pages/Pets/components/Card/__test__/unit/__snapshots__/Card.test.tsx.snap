@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card.tsx Match's snapshot 1`] = `
+<div
+  className="card"
+  data-testid="cat-card"
+>
+  <div
+    className="card-header"
+  >
+    <img
+      alt="cute-cat"
+      className="card-img"
+      src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2F0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
+    />
+    <button
+      className="heart"
+      onClick={[Function]}
+    >
+      <svg
+        data-testid="outlined-heart"
+      >
+        heartOutlined.svg
+      </svg>
+    </button>
+    <div
+      className="card-content"
+    >
+      <h3>
+        Sydney
+      </h3>
+      <p>
+        123456789
+      </p>
+      <p>
+        sydney@gmail.com
+      </p>
+    </div>
+  </div>
+</div>
+`;

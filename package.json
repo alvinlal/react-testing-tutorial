@@ -44,7 +44,9 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.5.0",
+    "@types/react-test-renderer": "^18.0.0",
     "@types/validator": "^13.7.5",
-    "msw": "^0.47.1"
+    "msw": "^0.47.1",
+    "react-test-renderer": "^18.2.0"
   }
 }

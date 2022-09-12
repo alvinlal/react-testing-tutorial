@@ -12,6 +12,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Card from '../../Card';
+import renderer from 'react-test-renderer';
 
 describe('Card.tsx', () => {
   const cat: Cat = {
@@ -75,5 +76,12 @@ describe('Card.tsx', () => {
     userEvent.click(screen.getByRole('button'));
     expect(screen.queryByTestId('filled-heart')).not.toBeInTheDocument();
     expect(screen.getByTestId('outlined-heart')).toBeInTheDocument();
+  });
+
+  // snapshot tests
+  it("Match's snapshot", () => {
+    const tree = renderer.create(<Card {...cat} index={1} />).toJSON();
+
+    expect(tree).toMatchSnapshot();
   });
 });

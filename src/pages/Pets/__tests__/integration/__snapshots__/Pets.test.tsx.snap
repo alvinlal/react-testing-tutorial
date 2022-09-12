@@ -1,0 +1,241 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pets.tsx Should match api request error state snapshot 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="app-container"
+  >
+    <div
+      className="pet-filter-container"
+    >
+      <div
+        className="filter-container"
+      >
+        <label
+          htmlFor="favorite"
+        >
+          Favorite
+        </label>
+        <select
+          className="form-select"
+          id="favorite"
+          name="favorite"
+          onChange={[Function]}
+        >
+          <option
+            value="any"
+          >
+            any
+          </option>
+          <option
+            value="favoured"
+          >
+            favoured
+          </option>
+          <option
+            value="not favoured"
+          >
+            not favoured
+          </option>
+        </select>
+      </div>
+      <div
+        className="filter-container"
+      >
+        <label
+          htmlFor="gender"
+        >
+          Gender
+        </label>
+        <select
+          className="form-select"
+          id="gender"
+          name="gender"
+          onChange={[Function]}
+        >
+          <option
+            value="any"
+          >
+            any
+          </option>
+          <option
+            value="male"
+          >
+            male
+          </option>
+          <option
+            value="female"
+          >
+            female
+          </option>
+        </select>
+      </div>
+    </div>
+    <h3>
+      something went wrong
+    </h3>
+  </div>
+</div>
+`;
+
+exports[`Pets.tsx Should match api request loading state snapshot 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="app-container"
+  >
+    <div
+      className="pet-filter-container"
+    >
+      <div
+        className="filter-container"
+      >
+        <label
+          htmlFor="favorite"
+        >
+          Favorite
+        </label>
+        <select
+          className="form-select"
+          id="favorite"
+          name="favorite"
+          onChange={[Function]}
+        >
+          <option
+            value="any"
+          >
+            any
+          </option>
+          <option
+            value="favoured"
+          >
+            favoured
+          </option>
+          <option
+            value="not favoured"
+          >
+            not favoured
+          </option>
+        </select>
+      </div>
+      <div
+        className="filter-container"
+      >
+        <label
+          htmlFor="gender"
+        >
+          Gender
+        </label>
+        <select
+          className="form-select"
+          id="gender"
+          name="gender"
+          onChange={[Function]}
+        >
+          <option
+            value="any"
+          >
+            any
+          </option>
+          <option
+            value="male"
+          >
+            male
+          </option>
+          <option
+            value="female"
+          >
+            female
+          </option>
+        </select>
+      </div>
+    </div>
+    <p>
+      loading cats...
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Pets.tsx Should match api request success state snapshot 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="app-container"
+  >
+    <div
+      className="pet-filter-container"
+    >
+      <div
+        className="filter-container"
+      >
+        <label
+          htmlFor="favorite"
+        >
+          Favorite
+        </label>
+        <select
+          className="form-select"
+          id="favorite"
+          name="favorite"
+          onChange={[Function]}
+        >
+          <option
+            value="any"
+          >
+            any
+          </option>
+          <option
+            value="favoured"
+          >
+            favoured
+          </option>
+          <option
+            value="not favoured"
+          >
+            not favoured
+          </option>
+        </select>
+      </div>
+      <div
+        className="filter-container"
+      >
+        <label
+          htmlFor="gender"
+        >
+          Gender
+        </label>
+        <select
+          className="form-select"
+          id="gender"
+          name="gender"
+          onChange={[Function]}
+        >
+          <option
+            value="any"
+          >
+            any
+          </option>
+          <option
+            value="male"
+          >
+            male
+          </option>
+          <option
+            value="female"
+          >
+            female
+          </option>
+        </select>
+      </div>
+    </div>
+    <p>
+      loading cats...
+    </p>
+  </div>
+</div>
+`;

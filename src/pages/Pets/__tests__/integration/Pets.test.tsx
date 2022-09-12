@@ -15,6 +15,8 @@ import userEvent from '@testing-library/user-event';
 import { server, rest } from '../../../../test-utils/server';
 import { PetsProvider } from '../../contexts/PetsContext';
 import Pets from '../../Pets';
+import renderer, { act } from 'react-test-renderer';
+import cats from '../../../../test-utils/mocks/cats.json';
 
 describe('Pets.tsx', () => {
   it('Should show 5 Card component if the api request is successfull', async () => {
@@ -28,6 +30,11 @@ describe('Pets.tsx', () => {
   });
 
   it('Should show loader when the api request is loading', async () => {
+    server.use(
+      rest.get('https://631c5fa04fa7d3264caca918.mockapi.io/api/cats', async (req, res, ctx) => {
+        return res(ctx.delay(100), ctx.json(cats));
+      })
+    );
     render(
       <PetsProvider>
         <Pets />
@@ -128,5 +135,53 @@ describe('Pets.tsx', () => {
     userEvent.selectOptions(genderFilter, 'male');
     const favouredMaleCatCards = screen.getAllByTestId('cat-card');
     expect(favouredMaleCatCards).toStrictEqual([cards[3]]);
+  });
+
+  // snapshot tests
+  it('Should match api request success state snapshot', async () => {
+    let tree;
+    await act(async () => {
+      tree = await renderer.create(
+        <PetsProvider>
+          <Pets />
+        </PetsProvider>
+      );
+    });
+    expect((tree as unknown as renderer.ReactTestRenderer).toJSON()).toMatchSnapshot();
+  });
+  it('Should match api request loading state snapshot', async () => {
+    server.use(
+      rest.get('https://631c5fa04fa7d3264caca918.mockapi.io/api/cats', async (req, res, ctx) => {
+        return res(ctx.delay(100), ctx.json(cats));
+      })
+    );
+    let tree;
+    await act(async () => {
+      tree = await renderer.create(
+        <PetsProvider>
+          <Pets />
+        </PetsProvider>
+      );
+    });
+
+    expect((tree as unknown as renderer.ReactTestRenderer).toJSON()).toMatchSnapshot();
+  });
+
+  it('Should match api request error state snapshot', async () => {
+    server.use(
+      rest.get('https://631c5fa04fa7d3264caca918.mockapi.io/api/cats', (req, res, ctx) => {
+        return res(ctx.status(500), ctx.json({ error: 'internal server error' }));
+      })
+    );
+    let tree;
+    await act(async () => {
+      tree = await renderer.create(
+        <PetsProvider>
+          <Pets />
+        </PetsProvider>
+      );
+    });
+    await act(() => Promise.resolve());
+    expect((tree as unknown as renderer.ReactTestRenderer).toJSON()).toMatchSnapshot();
   });
 });
