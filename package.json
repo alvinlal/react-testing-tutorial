@@ -20,8 +20,15 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "jest": "react-scripts test",
+    "cy:open": "npx cypress open",
+    "cy:run": "npx cypress run",
+    "cy:run:chrome": "npx cypress run --browser chrome",
+    "cy:run:firefox": "npx cypress run --browser firefox",
+    "cy:run:edge": "npx cypress run --browser edge",
+    "cy:run:safari": "npx cypress run --browser webkit",
     "eject": "react-scripts eject",
+    "test": "npm run jest -- --watchAll=false && npm run cy:run",
     "test:coverage": "npm test -- --coverage --watchAll=false"
   },
   "eslintConfig": {
@@ -46,6 +53,7 @@
     "@faker-js/faker": "^7.5.0",
     "@types/react-test-renderer": "^18.0.0",
     "@types/validator": "^13.7.5",
+    "cypress": "^10.8.0",
     "msw": "^0.47.1",
     "react-test-renderer": "^18.2.0"
   }
